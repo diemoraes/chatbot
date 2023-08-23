@@ -36,7 +36,7 @@ function start(client) {
 
       if (listaParticipantes.indexOf(confirmado) > -1) {
         client.sendText(message.from, 'Você já está na lista relaxa!!!')
-        client.sendText(message.from, 'Legal, já somos ' + listaPresenca.length + ', confirmados: \n' + listaPresenca.join('') + ' \n Quem mais??? Só mandar --> Eu <-- \n Para sair mande sair')
+        client.sendText(message.from, 'Legal, já somos ' + listaPresenca.length + ', confirmados: \n' + listaPresenca.join('\n') + ' \n Quem mais??? Só mandar --> Eu <-- \n Para sair mande sair')
           .then((result) => {
             console.log('Result: ', result); //return object success
           })
@@ -56,7 +56,7 @@ function start(client) {
       }
     } else if (message.body.includes('Avulso:') && message.isGroupMsg === true && message.groupInfo.name === grupo) {
       let confirmado = message.body.split(':');
-      listaPresenca.push(confirmado[1]);
+      listaPresenca.push(listaPresenca.length + 1 + ' - ' + confirmado[1]);
       client.sendText(message.from, 'Legal, já somos ' + listaPresenca.length + ', confirmados: \n' + listaPresenca.join('\n') + ' \n Quem mais??? Só mandar --> Eu <-- \n Para sair mande sair')
         .then((result) => {
           console.log('Result: ', result); //return object success
