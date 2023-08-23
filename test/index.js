@@ -66,6 +66,7 @@ function start(client) {
         });
     } else if (message.body === 'Limpar' && message.isGroupMsg === true && message.groupInfo.name === grupo) {
       listaPresenca.length = 0;
+      listaParticipantes.length = 0;
       client.sendText(message.from, 'A Lista de presença foi reiniciada. Quem mais??? Bora só falar --> Eu <--')
         .then((result) => {
           console.log('Result: ', result); //return object success
@@ -80,8 +81,11 @@ function start(client) {
 
         const posicao = listaParticipantes.indexOf(confirmado);
 
-        listaPresenca.splice(posicao,1);
+        listaPresenca.length = 0;
         listaParticipantes.splice(posicao,1);
+        listaParticipantes.forEach((item, index) => {
+          listaPresenca.push(`${index + 1} - ${item}`);
+        });
 
         client.sendText(message.from, 'Legal, já somos ' + listaPresenca.length + ', confirmados: \n' + listaPresenca.join('\n') + ' \n Quem mais??? Só mandar --> Eu <-- \n Para sair mande sair')
             .then((result) => {
@@ -101,8 +105,11 @@ function start(client) {
         let confirmado = message.body.split(':');
         const posicao = listaParticipantes.indexOf(confirmado[1]);
 
-        listaPresenca.splice(posicao,1);
+        listaPresenca.length = 0;
         listaParticipantes.splice(posicao,1);
+        listaParticipantes.forEach((item, index) => {
+          listaPresenca.push(`${index + 1} - ${item}`);
+        });
 
         client.sendText(message.from, 'Legal, ainda somos ' + listaPresenca.length + ', confirmados: \n' + listaPresenca.join('\n') + ' \n Quem mais??? Só mandar --> Eu <-- \n Para sair mande sair')
             .then((result) => {
