@@ -100,7 +100,7 @@ function start(client) {
       }
 
     }
-    else if (essage.body.toUpperCase().includes('SAIR:') && message.isGroupMsg === true && message.groupInfo.name === grupo) {
+    else if (message.body.toUpperCase().includes('SAIR:') && message.isGroupMsg === true && message.groupInfo.name === grupo) {
       try {
         let confirmado = message.body.split(':');
         const posicao = listaParticipantes.indexOf(confirmado[1]);
