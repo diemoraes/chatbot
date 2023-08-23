@@ -96,6 +96,27 @@ function start(client) {
       }
 
     }
+    else if (essage.body.toUpperCase().includes('SAIR:') && message.isGroupMsg === true && message.groupInfo.name === grupo) {
+      try {
+        let confirmado = message.body.split(':');
+        const posicao = listaParticipantes.indexOf(confirmado[1]);
+
+        listaPresenca.splice(posicao,1);
+        listaParticipantes.splice(posicao,1);
+
+        client.sendText(message.from, 'Legal, ainda somos ' + listaPresenca.length + ', confirmados: \n' + listaPresenca.join('\n') + ' \n Quem mais??? Só mandar --> Eu <-- \n Para sair mande sair')
+            .then((result) => {
+              console.log('Result: ', result); //return object success
+            })
+            .catch((erro) => {
+              console.error('Error when sending: ', erro); //return object error
+            });
+
+      } catch (error) {
+        console.error('Error when sending: ', error); //return object error
+      }
+
+    }
   });
 }
 
